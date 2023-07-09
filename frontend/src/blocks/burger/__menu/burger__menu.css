@@ -1,0 +1,8 @@
+.burger__menu {
+  box-sizing: border-box;
+  display: none;
+  margin-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+}

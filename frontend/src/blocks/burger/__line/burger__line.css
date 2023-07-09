@@ -1,0 +1,10 @@
+.burger__line {
+  margin-top: 6px;
+  width: 24px;
+  height: 0;
+  border-bottom: 3px solid #fff;
+}
+
+.burger__line:first-child {
+  margin: 0;
+}

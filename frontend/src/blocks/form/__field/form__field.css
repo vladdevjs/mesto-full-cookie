@@ -1,0 +1,21 @@
+.form__field {
+  margin: 0;
+  padding-bottom: 10px;
+  width: 100%;
+  border: 0;
+  box-sizing: border-box;
+  outline: none;
+  border-bottom: 1px solid #c4c4c4;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  margin-bottom: 5px;
+}
+
+.form__field::-webkit-input-placeholder {
+  color: #c4c4c4;
+}
+
+.form__field:-moz-placeholder {
+  color: #c4c4c4;
+}

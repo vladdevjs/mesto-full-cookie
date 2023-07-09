@@ -1,0 +1,12 @@
+.burger__menu_opened {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-center;
+  align-items: flex-center;
+}
+
+@media screen and (min-width: 650px) {
+  .burger__menu_opened {
+    display: none;
+  }
+}
