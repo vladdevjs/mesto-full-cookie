@@ -71,7 +71,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: `http://api.vladdevs.nomoreparties.sbs/`,
+  baseUrl: `http://api.vladdevs.nomoreparties.sbs`,
   headers: {
     'Content-Type': 'application/json',
   },

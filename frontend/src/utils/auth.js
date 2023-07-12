@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.vladdevs.nomoreparties.sbs/';
+export const BASE_URL = 'http://api.vladdevs.nomoreparties.sbs';
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
