@@ -11,13 +11,11 @@ const documentNotFound = require('./middlewares/documentNotFound');
 const { port, mongoURI } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const allowedOrigins = /^https?:\/\/vladdevs\.nomoreparties\.sbs$/;
-
 const app = express();
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: ['http://vladdevs.nomoreparties.sbs', 'https://vladdevs.nomoreparties.sbs'],
     credentials: true,
   }),
 );
