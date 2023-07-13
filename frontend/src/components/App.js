@@ -41,17 +41,6 @@ function App() {
 
   useEffect(() => {
     if (loggedIn) {
-      auth
-      .checkToken()
-      .then((res) => {
-        setloggedIn(true);
-        setEmail(res.email);
-        navigate('/', { replace: true });
-      })
-      .catch((err) => {
-        setloggedIn(false);
-        console.log(`${err.message}`);
-      });
       Promise.all([api.getUserData(), api.getInitialCards()])
         .then(([userData, cardData]) => {
           setCurrentUser(userData);
@@ -63,19 +52,19 @@ function App() {
     }
   }, [loggedIn]);
 
-  // useEffect(() => {
-  //   auth
-  //     .checkToken()
-  //     .then((res) => {
-  //       setloggedIn(true);
-  //       setEmail(res.email);
-  //       navigate('/', { replace: true });
-  //     })
-  //     .catch((err) => {
-  //       setloggedIn(false);
-  //       console.log(`${err.message}`);
-  //     });
-  // }, []);
+  useEffect(() => {
+    auth
+      .checkToken()
+      .then((res) => {
+        setloggedIn(true);
+        setEmail(res.email);
+        navigate('/', { replace: true });
+      })
+      .catch((err) => {
+        setloggedIn(false);
+        console.log(`${err.message}`);
+      });
+  }, []);
 
   const changeFormValue = (name, value) => {
     setFormValue({
