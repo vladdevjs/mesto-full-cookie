@@ -79,8 +79,8 @@ const login = (req, res, next) => {
         .cookie('jwt', token, {
           httpOnly: true,
           maxAge: 3600000 * 24 * 7,
-          sameSite: true,
-          secure: true,
+          sameSite: 'none',
+          secure: false,
         })
         .send({ message: 'Авторизация прошла успешно' });
     })
