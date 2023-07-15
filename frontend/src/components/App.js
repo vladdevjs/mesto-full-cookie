@@ -62,7 +62,7 @@ function App() {
       })
       .catch((err) => {
         setloggedIn(false);
-        console.log(`${err.message}`);
+        console.log(err);
       });
   }, []);
 
@@ -100,8 +100,8 @@ function App() {
         setFormValue({ email: '', password: '' });
         navigate('/', { replace: true });
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        console.log(err);
         setToolTipStatus('error');
         setInfoTooltipOpen(true);
       });
