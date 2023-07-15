@@ -16,6 +16,7 @@ import Register from './Register';
 import Login from './Login';
 import ProtectedRouteElement from './ProtectedRoute';
 import Spin from './Spin';
+import ErrorMessage from './ErrorMessage';
 import useEscapeKey from '../utils/useEscapeKey';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
   const [сardToDelete, setСardToDelete] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [cards, setCards] = useState([]);
   const [loggedIn, setloggedIn] = useState(null);
   const [email, setEmail] = useState('');
@@ -47,7 +49,7 @@ function App() {
           setCards(cardData);
         })
         .catch((error) => {
-          console.log(error);
+          showError(error);
         });
     }
   }, [loggedIn]);
@@ -62,7 +64,7 @@ function App() {
       })
       .catch((err) => {
         setloggedIn(false);
-        console.log(err);
+        showError(err);
       });
   }, []);
 
@@ -83,6 +85,7 @@ function App() {
         navigate('/sign-in', { replace: true });
       })
       .catch(() => {
+        showError(err);
         setToolTipStatus('error');
         setInfoTooltipOpen(true);
       });
@@ -101,7 +104,7 @@ function App() {
         navigate('/', { replace: true });
       })
       .catch((err) => {
-        console.log(err);
+        showError(err);
         setToolTipStatus('error');
         setInfoTooltipOpen(true);
       });
@@ -120,7 +123,7 @@ function App() {
         setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
       })
       .catch((error) => {
-        console.log(`Ошибка изменения статуса лайка: ${error}`);
+        showError(`Ошибка изменения статуса лайка: ${error}`);
       });
   }
 
@@ -137,7 +140,7 @@ function App() {
         closeAllPopups();
       })
       .catch((error) => {
-        console.log(`Ошибка удаления карточки: ${error}`);
+        showError(`Ошибка удаления карточки: ${error}`);
       });
   }
 
@@ -172,7 +175,7 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        showError(err);
       })
       .finally(() => setIsLoading(false));
   }
@@ -185,7 +188,7 @@ function App() {
         closeAllPopups();
       })
       .catch((err) => {
-        console.log(err);
+        showError(err);
       })
       .finally(() => setIsLoading(false));
   }
@@ -198,9 +201,16 @@ function App() {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
-      .catch((err) => console.log(err))
+      .catch((err) => showError(err))
       .finally(() => setIsLoading(false));
   }
+
+  const showError = (message) => {
+    setErrorMessage(message);
+    setTimeout(() => {
+      setErrorMessage(null);
+    }, 3000);
+  };
 
   useEscapeKey(closeAllPopups);
 
@@ -241,8 +251,8 @@ function App() {
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} isLoading={isLoading} />
       <ImagePopup isOpen={isImagePopupOpen} card={selectedCard} onClose={closeAllPopups} />
       <ConfirmationPopup isOpen={isConfirmationPopupOpen} onClose={closeAllPopups} onSubmit={() => handleCardDelete(сardToDelete)} />
-
       <InfoToolTip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} toolTipStatus={toolTipStatus} />
+      <ErrorMessage errorMessage={errorMessage}/>
     </CurrentUserContext.Provider>
   );
 }
