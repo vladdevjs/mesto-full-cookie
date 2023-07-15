@@ -5,7 +5,7 @@ const {
 } = process.env;
 
 module.exports = {
-  port: NODE_ENV === 'production' ? PORT : 4000,
+  port: NODE_ENV === 'production' ? PORT : 3000,
   mongoURI:
     NODE_ENV === 'production'
       ? MONGODB_URI
