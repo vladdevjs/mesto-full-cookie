@@ -5,7 +5,7 @@ const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`${res.message} ${res.status}`);
+  return res.json().then(data => Promise.reject(`Ошибка ${res.status}: ${data.message} `));
 }
 
 export const register = (email, password) => {
