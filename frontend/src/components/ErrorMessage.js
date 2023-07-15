@@ -6,7 +6,7 @@ const ErrorMessage = ({ errorMessage }) => {
     <>
       {errorMessage && (
         <div className='error-popup'>
-          <img src={errorImage} className='error-popup__image' alt='Ошибка' />
+          <img src={errorImage} className='error-popup__image' alt={errorMessage} />
           <p className='error-popup__message'>{errorMessage}</p>
         </div>
       )}

@@ -252,7 +252,7 @@ function App() {
       <ImagePopup isOpen={isImagePopupOpen} card={selectedCard} onClose={closeAllPopups} />
       <ConfirmationPopup isOpen={isConfirmationPopupOpen} onClose={closeAllPopups} onSubmit={() => handleCardDelete(сardToDelete)} />
       <InfoToolTip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} toolTipStatus={toolTipStatus} />
-      <ErrorMessage errorMessage={errorMessage}/>
+      <ErrorMessage errorMessage={errorMessage} />
     </CurrentUserContext.Provider>
   );
 }
