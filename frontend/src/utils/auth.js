@@ -1,5 +1,13 @@
 export const BASE_URL = 'https://api.vladdevs.nomoreparties.sbs';
 
+
+const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`${res.message} ${res.status}`);
+}
+
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
@@ -8,14 +16,7 @@ export const register = (email, password) => {
     },
     credentials: 'include',
     body: JSON.stringify({ password, email }),
-  }).then((response) => {
-    if (response.ok) {
-      return response.json();
-    } else {
-      response.json().then((data) => console.error(data.error));
-      throw new Error();
-    }
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const authorize = (email, password) => {
@@ -26,18 +27,7 @@ export const authorize = (email, password) => {
     },
     credentials: 'include',
     body: JSON.stringify({ password, email }),
-  })
-    .then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        response.json().then((data) => console.error(data.message));
-        throw new Error();
-      }
-    })
-    .catch((err) => {
-      throw err;
-    });
+  }).then((res) => checkResponse(res));
 };
 
 export const logout = () => {
@@ -47,18 +37,7 @@ export const logout = () => {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
-  })
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        response.json().then((data) => console.error(data.message));
-        throw new Error();
-      }
-    })
-    .catch((err) => {
-      throw err;
-    });
+  }).then((res) => checkResponse(res));
 };
 
 export const checkToken = () => {
@@ -68,12 +47,5 @@ export const checkToken = () => {
       'Content-Type': 'application/json',
     },
     credentials: 'include',
-  }).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return res.json().then((err) => {
-      throw new Error(err.message);
-    });
-  });
+  }).then((res) => checkResponse(res));
 };
