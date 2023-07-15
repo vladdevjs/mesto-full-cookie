@@ -84,7 +84,7 @@ function App() {
         setFormValue({ email: '', password: '' });
         navigate('/sign-in', { replace: true });
       })
-      .catch(() => {
+      .catch((err) => {
         showError(err);
         setToolTipStatus('error');
         setInfoTooltipOpen(true);
