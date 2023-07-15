@@ -1,9 +1,11 @@
 require('dotenv').config();
 
-const { NODE_ENV, PORT, MONGODB_URI, JWT_SECRET } = process.env;
+const {
+  NODE_ENV, PORT, MONGODB_URI, JWT_SECRET,
+} = process.env;
 
 module.exports = {
-  port: NODE_ENV === 'production' ? PORT : 3000,
+  port: NODE_ENV === 'production' ? PORT : 4000,
   mongoURI:
     NODE_ENV === 'production'
       ? MONGODB_URI

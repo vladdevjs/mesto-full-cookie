@@ -39,18 +39,18 @@ const getUserInfo = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
   bcrypt
     .hash(password, 10)
-    .then((hash) =>
-      User.create({
-        name,
-        about,
-        avatar,
-        email,
-        password: hash,
-      })
-    )
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    }))
     .then((user) => {
       res.send(formatUser(user));
     })
@@ -59,7 +59,7 @@ const createUser = (req, res, next) => {
         next(new BadRequestError('Предоставлены некорректные данные'));
       } else if (err.code === 11000) {
         next(
-          new ConflictError('Пользователь с таким email уже зарегистрирован')
+          new ConflictError('Пользователь с таким email уже зарегистрирован'),
         );
       } else {
         next(err);
