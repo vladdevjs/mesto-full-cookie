@@ -7,13 +7,17 @@ const checkResponse = (res) => {
   return res.json().then(data => Promise.reject(`Ошибка ${res.status}: ${data.message} `));
 }
 
+const options = {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  credentials: 'include'
+}
+
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
+    ...options,
     body: JSON.stringify({ password, email }),
   }).then((res) => checkResponse(res));
 };
@@ -21,10 +25,7 @@ export const register = (email, password) => {
 export const authorize = (email, password) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
+    ...options,
     body: JSON.stringify({ password, email }),
   }).then((res) => checkResponse(res));
 };
@@ -32,19 +33,13 @@ export const authorize = (email, password) => {
 export const logout = () => {
   return fetch(`${BASE_URL}/logout`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
+    ...options,
   }).then((res) => checkResponse(res));
 };
 
 export const checkToken = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: 'include',
+    ...options,
   }).then((res) => checkResponse(res));
 };
